@@ -29,16 +29,15 @@ class FirstLayout(Screen,ImageButton):
                        "palmeiras",
                        "coldplay"]
 
-    numero = randint(0, len(ListadePalavras) - 1)
     var = 0
     letra = ""
-    # Gera os tracinhos para descobrir a palavra
-    num = numero
     linha = []
+    num = randint(0, len(ListadePalavras) - 1)
+    numero = num
     for i in range(len(ListadePalavras[numero])): linha.append(" _ ")
-    path = 'erro0.png'
 
     def gerar_linhas(self):
+        # Gera os tracinhos para descobrir a palavra
         self.linha = []
         for i in range(len(self.ListadePalavras[self.num])): self.linha.append(" _ ")
         return self.linha
@@ -84,11 +83,14 @@ class FirstLayout(Screen,ImageButton):
         self.ids.box3.text = "".join(self.linha)
         self.forca()
         return True
+
     def open_popup(self):
         pop = CustomPopup(self)
         pop.open()
 
-
+    def desistir(self):
+        sair = Sair_popup(self)
+        sair.open()
 
     def identifica_letra(self):
         linha = self.linha
@@ -125,11 +127,8 @@ class FirstLayout(Screen,ImageButton):
         self.forca()
         return True
 
-
-
 class Menu(Screen):
     pass
-
 
 class CustomPopup(Popup):
     def __init__(self, FirstLayout, **kwargs):
@@ -137,11 +136,20 @@ class CustomPopup(Popup):
         self.FirstLayout = FirstLayout
         self.title= ''
         if ' _ ' not in self.FirstLayout.linha:
-        	self.title = "Você Perdeu, deseja jogar novamente?"
+        	self.title = "Você Venceu, deseja jogar novamente?"
         else: 
-            self.title = "Você Venceu, deseja jogar novamente?"
-        
+            self.title = "Você Perdeu, deseja jogar novamente?"
     
+    def restart(self):
+        self.FirstLayout.reinicia_jogo()
+        self.FirstLayout.restart_game()
+
+class Sair_popup(Popup):
+    def __init__(self, FirstLayout, **kwargs):
+        super(Sair_popup,self).__init__(**kwargs)
+        self.FirstLayout = FirstLayout
+        self.title= 'Deseja Sair?'
+        
     def restart(self):
         self.FirstLayout.reinicia_jogo()
         self.FirstLayout.restart_game()
