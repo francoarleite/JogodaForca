@@ -1,0 +1,302 @@
+
+<Telas>:
+    Menu:
+        name: 'tela1'
+    FirstLayout:
+        name: 'tela2'
+
+<CustomPopup>:
+	id: pop
+    size_hint: .7,.3
+    auto_dismiss: False
+    title: self.title 
+    BoxLayout:
+    	spacing: '5dp'
+        size_hint:.2,.2
+        Button:
+            text: 'Sim'
+            on_press: root.dismiss()
+            on_press: root.restart()
+        Button:
+            text: 'Não'
+            on_press: root.dismiss()
+            on_press: app.root.current = 'tela1'
+            on_release: root.restart()
+
+<Sair_popup>:
+	id: pop_desistir
+    size_hint: .7,.3
+    auto_dismiss: False
+    title: self.title 
+    BoxLayout:
+    	spacing: '5dp'
+        size_hint:.2,.2
+        Button:
+            text: 'Não'
+            on_press: root.dismiss()
+        Button:
+            text: 'Sim'
+            on_press: root.restart()
+            on_press: app.root.current = 'tela1'
+            on_release: root.dismiss()
+
+<Menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 200
+        spacing: 20
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source:'alphabet/paper8.jpg'
+        Button:
+            size_hint_y:None
+            height: 120
+            
+            text: "Iniciar"
+            on_press: app.root.current = "tela2"
+            #on_release: root.reinicia_jogo
+        Button:
+            size_hint_y: None
+            height: 120
+            text: "Sair"
+            on_release: app.stop()
+<FirstLayout>:
+    BoxLayout
+        padding: 0,'10dp',0,0
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source:'alphabet/paper8.jpg'
+        orientation: 'vertical'
+
+        ImageButton:
+            source:"alphabet/back.png"
+            size_hint: .1,None
+            height: 60
+            on_press: root.desistir()
+        BoxLayout:
+            orientation:'vertical'
+            Image:
+                id:forca
+                source:''
+                size_hint: 1,3
+                allow_stretch: True
+        StackLayout:
+            padding: '32sp'
+            Label:
+                id: box1
+                size_hint: 1,.5
+                font_size: '15sp'
+                color: 0,0,0,1
+                markup: True
+                halign: 'center'
+                valign: 'top'
+
+        StackLayout:
+        	padding:'12dp'
+            Label:
+                id: box3
+                font_size: '23sp'
+                size_hint: 1,.1
+                color: 0,0,0,1
+                halign: "center"
+                valign: "top"
+                multiline: True
+
+        GridLayout:
+            rows:3
+            cols:9
+            padding: '10dp'
+
+            ImageButton:
+                source:"alphabet/A.png"
+                id:a
+                text: 'A'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "A"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/B.png"
+                id:b
+                text: 'B'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "B"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/C.png"
+                id:c
+                text: 'C'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "C"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/D.png"
+                id:d
+                text: 'D'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "D"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/E.png"
+                id:e
+                text: 'E'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "E"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/F.png"
+                id:f
+                text: 'F'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "F"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/G.png"
+                id:g
+                text: 'G'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "G"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/H.png"
+                id:h
+                text: 'H'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "H"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/I.png"
+                id:i
+                text: 'I'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "I"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/J.png"
+                id:j
+                text: 'J'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "J"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/K.png"
+                id:k
+                text: 'K'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "K"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/L.png"
+                id:l
+                text: 'L'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "L"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/M.png"
+                id:m
+                text: 'M'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "M"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/N.png"
+                id:n
+                text: 'N'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "N"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/O.png"
+                id:o
+                text: 'O'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "O"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/P.png"
+                id:p
+                text: 'P'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "P"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/Q.png"
+                id:q
+                text: 'Q'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "Q"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/R.png"
+                id:r
+                text: 'R'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "R"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/S.png"
+                id:s
+                text: 'S'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "S"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/T.png"
+                id:t
+                text: 'T'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "T"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/U.png"
+                id:u
+                text: 'U'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "U"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/V.png"
+                id:v
+                text: 'V'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "V"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/W.png"
+                id:w
+                text: 'W'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "W"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/X.png"
+                id:x
+                text: 'X'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "X"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/Y.png"
+                id:y
+                text: 'Y'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "Y"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/Z.png"
+                id:z
+                text: 'Z'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "Z"
+                on_release: root.identifica_letra()
+            ImageButton:
+                source:"alphabet/CS.png"
+                id:ç
+                text: 'Ç'
+                size_hint: 0.2,0.2
+                on_press: root.letra = "Ç"
+                on_release: root.identifica_letra()
