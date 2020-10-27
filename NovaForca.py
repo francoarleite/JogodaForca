@@ -34,6 +34,7 @@ class FirstLayout(Screen,ImageButton):
     linha = []
     num = randint(0, len(ListadePalavras) - 1)
     numero = num
+    lista_de_erro = []
     for i in range(len(ListadePalavras[numero])): linha.append(" _ ")
 
     def gerar_linhas(self):
@@ -95,12 +96,16 @@ class FirstLayout(Screen,ImageButton):
     def identifica_letra(self):
         linha = self.linha
         palavra = self.gera_palavra()
-        if self.letra in palavra:
+        if self.letra in self.lista_de_erro:
+            return None
+        elif self.letra in palavra:
             for i in range(len(palavra)):
                 if self.letra == palavra[i]:
                     linha[i] = palavra[i]
-
         else:
+            self.lista_de_erro.append(self.letra)
+            for letra in self.lista_de_erro:
+                self.ids[letra.lower()].source = "ALPHABET ERRADO/"+ letra.lower() +" - errado.png"
             self.var += 1
         self.ids.box1.text = "Dica: " + self.gera_dica().upper()
         self.ids.box3.text = "".join(linha)
@@ -116,12 +121,17 @@ class FirstLayout(Screen,ImageButton):
         self.gerar_linhas()
         self.var = 0
         self.on_pre_enter()
+        self.lista_de_erro = []
+        for id, widget in self.ids.items():
+            if isinstance(widget,ImageButton) == True:
+                self.ids[id].source = "alphabet/"+ id.upper() +".png"
 
 
     def restart_game(self):
         self.num = self.gerar_numero()
         self.gerar_linhas()
         self.var = 0
+        self.lista_de_erro = []
         self.ids.box1.text = "Dica:   " + self.gera_dica().upper()
         self.ids.box3.text = "".join(self.linha)
         self.forca()
