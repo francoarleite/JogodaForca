@@ -105,7 +105,7 @@ class FirstLayout(Screen,ImageButton):
         else:
             self.lista_de_erro.append(self.letra)
             for letra in self.lista_de_erro:
-                self.ids[letra.lower()].source = "ALPHABET ERRADO/"+ letra.lower() +" - errado.png"
+                self.ids[letra.lower()].source = "ALPHABET ERRORS/"+ letra.lower() +" - errado.png"
             self.var += 1
         self.ids.box1.text = "Dica: " + self.gera_dica().upper()
         self.ids.box3.text = "".join(linha)
