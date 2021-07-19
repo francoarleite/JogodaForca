@@ -22,43 +22,41 @@ class ImageButton(ButtonBehavior, Image):
 
 
 class FirstLayout(Screen,ImageButton):
-
-    ListadeDicas = ["Inseto", "Fruta", "Nome", "seleção", "Natureza", "Animal", "Doce", "País",
-                    "Time de Futebol", "Banda Musical"]
-    ListadePalavras = ["formiga", "morango", "alice", "afeganistao", "chuva", "girafa", "goiabada", "alemanha",
-                       "palmeiras",
-                       "coldplay"]
-
+    
+    #Ler de um arquivo txt as dicas e as palavras e adicionam em uma lista
+    dicas = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_dicas.txt", 'r', encoding='utf-8')
+    palavras = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_palavras.txt", 'r',encoding='utf-8')
+    lista_de_palavras = [i[:-1] for i in list(palavras)]
+    lista_de_dicas = [i[:-1] for i in list(dicas)]
+    
+    #Setando as variaveis auxiliares
     var = 0
     letra = ""
-    linha = []
-    num = randint(0, len(ListadePalavras) - 1)
-    numero = num
+    num = randint(0, len(lista_de_palavras) - 1)
     lista_de_erro = []
-    for i in range(len(ListadePalavras[numero])): linha.append(" _ ")
+    linha = [" _ " for i in range(len(lista_de_palavras[num]))]
 
     def gerar_linhas(self):
         # Gera os tracinhos para descobrir a palavra
         self.linha = []
-        for i in range(len(self.ListadePalavras[self.num])): self.linha.append(" _ ")
+        for i in range(len(self.lista_de_palavras[self.num])): self.linha.append(" _ ")
         return self.linha
 
 
     def gerar_numero(self):
         #Gera um numero aleatorio
-        numero = randint(0, len(self.ListadePalavras) - 1)
+        numero = randint(0, len(self.lista_de_palavras) - 1)
         return numero
-
 
     def gera_dica(self):
         #Gera uma dica para o jogo
-        dica = self.ListadeDicas[self.num]
+        dica = self.lista_de_dicas[self.num]
         return dica
 
 
     def gera_palavra(self):
         # Gera uma palavra para o jogo
-        palavra = self.ListadePalavras[self.num]
+        palavra = self.lista_de_palavras[self.num]
         return palavra.upper()
 
 
@@ -96,12 +94,16 @@ class FirstLayout(Screen,ImageButton):
     def identifica_letra(self):
         linha = self.linha
         palavra = self.gera_palavra()
+
         if self.letra in self.lista_de_erro:
-            return None
+            return None #Inserir um textbox informando que o usuario já escolheu essa letra
+
         elif self.letra in palavra:
             for i in range(len(palavra)):
                 if self.letra == palavra[i]:
-                    linha[i] = palavra[i]
+                    print(linha)
+                    linha[i] = " {} ".format(palavra[i])
+                    print(linha)
         else:
             self.lista_de_erro.append(self.letra)
             for letra in self.lista_de_erro:
@@ -110,11 +112,10 @@ class FirstLayout(Screen,ImageButton):
         self.ids.box1.text = "Dica: " + self.gera_dica().upper()
         self.ids.box3.text = "".join(linha)
         self.forca()
-        if " _ " not in self.linha:
-        	self.open_popup()
-       
-        elif self.var == 6:
+        
+        if self.var >= 6 or " _ " not in self.linha:
             self.open_popup()
+
 
     def reinicia_jogo(self):
         self.num = self.gerar_numero()
@@ -124,7 +125,7 @@ class FirstLayout(Screen,ImageButton):
         self.lista_de_erro = []
         for id, widget in self.ids.items():
             if isinstance(widget,ImageButton) == True:
-                self.ids[id].source = "alphabet/"+ id.upper() +".png"
+                self.ids[id].source = "Alphabet/"+ id.upper() +".png"
 
 
     def restart_game(self):
@@ -146,9 +147,9 @@ class CustomPopup(Popup):
         self.FirstLayout = FirstLayout
         self.title= ''
         if ' _ ' not in self.FirstLayout.linha:
-        	self.title = "Você Venceu, deseja jogar novamente?"
+        	self.title = "Você Venceu :) , deseja jogar novamente?"
         else: 
-            self.title = "Você Perdeu, deseja jogar novamente?"
+            self.title = "Você Perdeu :((( , deseja jogar novamente?"
     
     def restart(self):
         self.FirstLayout.reinicia_jogo()

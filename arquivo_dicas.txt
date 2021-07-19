@@ -1,0 +1,10 @@
+Inseto
+Fruta
+Nome
+seleção
+Natureza
+Animal
+Doce
+País
+Time de Futebol
+Banda Musical
