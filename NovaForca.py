@@ -9,6 +9,8 @@ from kivy.uix.image import Image
 from kivy.uix.image import Image
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
+from kivy.animation import Animation
+import re
 
 
 class Telas(ScreenManager):
@@ -26,8 +28,8 @@ class FirstLayout(Screen,ImageButton):
     #Ler de um arquivo txt as dicas e as palavras e adicionam em uma lista
     dicas = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_dicas.txt", 'r', encoding='utf-8')
     palavras = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_palavras.txt", 'r',encoding='utf-8')
-    lista_de_palavras = [i[:-1] for i in list(palavras)]
-    lista_de_dicas = [i[:-1] for i in list(dicas)]
+    lista_de_palavras = [re.sub("\n","",i) for i in list(palavras)]
+    lista_de_dicas = [re.sub("\n","",i) for i in list(dicas)]
     
     #Setando as variaveis auxiliares
     var = 0
@@ -101,9 +103,8 @@ class FirstLayout(Screen,ImageButton):
         elif self.letra in palavra:
             for i in range(len(palavra)):
                 if self.letra == palavra[i]:
-                    print(linha)
                     linha[i] = " {} ".format(palavra[i])
-                    print(linha)
+
         else:
             self.lista_de_erro.append(self.letra)
             for letra in self.lista_de_erro:
@@ -164,6 +165,10 @@ class Sair_popup(Popup):
     def restart(self):
         self.FirstLayout.reinicia_jogo()
         self.FirstLayout.restart_game()
+
+    # def animar(self, popup, *args):
+    #     animar = Animation(size_hint=(.2,.8))
+    #     animar.start(popup)
         
 class Principal(App):
     def build(self):
