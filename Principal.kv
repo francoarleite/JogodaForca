@@ -12,6 +12,8 @@
     title: self.title
     title_align: 'center'
     title_size:18
+    font_name: 'fonts\giz_cera.ttf'
+    font_size: '50dp'
     BoxLayout:
     	spacing: '5dp'
         size_hint:.2,.2
@@ -19,11 +21,17 @@
             text: 'Sim'
             on_press: root.dismiss()
             on_press: root.restart()
+            font_name: 'fonts\giz_cera.ttf'
+            font_size: '50dp'
+            color: (1,1,1,1)
         Button:
             text: 'Não'
             on_press: root.dismiss()
             on_press: app.root.current = 'tela1'
             on_release: root.restart()
+            font_name: 'fonts\giz_cera.ttf'
+            font_size: '50dp'
+            color: (1,1,1,1)
 
 <Sair_popup>:
 	id: pop_desistir
@@ -38,8 +46,16 @@
         Button:
             text: 'Não'
             on_press: root.dismiss()
+            background_color: (0,0,0,0)
+            font_name: 'fonts\giz_cera.ttf'
+            font_size: '50dp'
+            color: (1,1,1,1)
         Button:
             text: 'Sim'
+            background_color: (0,0,0,0)
+            font_name: 'fonts\giz_cera.ttf'
+            font_size: '50dp'
+            color: (1,1,1,1)
             on_press: root.restart()
             on_press: app.root.current = 'tela1'
             on_release: root.dismiss()
@@ -54,17 +70,34 @@
                 pos: self.pos
                 size: self.size
                 source:'alphabet/paper8.jpg'
-        Button:
-            size_hint_y:None
-            height: 120          
-            text: "Iniciar"
-            on_press: app.root.current = "tela2"
-            #on_release: root.reinicia_jogo
-        Button:
-            size_hint_y: None
-            height: 120
-            text: "Sair"
-            on_release: app.stop()
+        Label:
+            size_hint: 1,.1
+            text:'JOGO DA FORCA'
+            font_size: 70
+            font_name: 'fonts\giz_cera.ttf'
+            strikethrough: True
+            color: (0,0,0,1)
+        BoxLayout:
+            orientation:'vertical'
+            Button:
+                size_hint: 1, None
+                height: '120dp'
+                text: "Iniciar"
+                on_press: app.root.current = "tela2"
+                background_color: (0,0,0,0)
+                font_name: 'fonts\giz_cera.ttf'
+                font_size: '50dp'
+                color: (0,0,0,1)
+                #on_release: root.reinicia_jogo
+            Button:
+                size_hint: 1, None
+                height: '120dp'
+                text: "Sair"
+                background_color: (0,0,0,0)
+                font_name: 'fonts\giz_cera.ttf'
+                font_size: '50dp'
+                color: (0,0,0,1)
+                on_release: app.stop()
 <FirstLayout>:
     BoxLayout
         padding: 0,'10dp',0,0
@@ -74,7 +107,6 @@
                 size: self.size
                 source:'alphabet/paper8.jpg'
         orientation: 'vertical'
-
         ImageButton:
             source:"alphabet/back.png"
             size_hint: .1,None
@@ -97,7 +129,7 @@
                 markup: True
                 halign: 'center'
                 valign: 'top'
-                font_name: 'fonts\Colored Crayons.ttf'
+                font_name: 'fonts\giz_cera.ttf'
                 font_size: '50dp'
 
 
@@ -111,7 +143,7 @@
                 halign: "center"
                 valign: "top"
                 multiline: True
-                font_name: 'fonts\Colored Crayons.ttf'
+                font_name: 'fonts\giz_cera.ttf'
                 font_size: '50dp'
 
         GridLayout:
