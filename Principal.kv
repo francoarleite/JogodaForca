@@ -11,9 +11,12 @@
     auto_dismiss: False
     title: self.title
     title_align: 'center'
-    title_size:18
-    font_name: 'fonts\giz_cera.ttf'
-    font_size: '50dp'
+    title_size: '50dp'
+    title_color: (0,0,0,1)
+    title_font: 'fonts\giz_cera.ttf'
+    separator_color:(0,0,0,1)
+    background: 'alphabet/bg_popup.png'
+
     BoxLayout:
     	spacing: '5dp'
         size_hint:.2,.2
@@ -21,17 +24,23 @@
             text: 'Sim'
             on_press: root.dismiss()
             on_press: root.restart()
+            background_color: (0,0,0,0)
             font_name: 'fonts\giz_cera.ttf'
             font_size: '50dp'
-            color: (1,1,1,1)
+            color: (0,0,0,1)
+            canvas.before:
+                Line:
+                    width: .5
+                    rectangle: (self.width+self.x, self.y,0,self.height+5)
         Button:
             text: 'Não'
             on_press: root.dismiss()
             on_press: app.root.current = 'tela1'
             on_release: root.restart()
+            background_color: (0,0,0,0)
             font_name: 'fonts\giz_cera.ttf'
             font_size: '50dp'
-            color: (1,1,1,1)
+            color: (0,0,0,1)
 
 <Sair_popup>:
 	id: pop_desistir
@@ -39,26 +48,52 @@
     auto_dismiss: False
     title: self.title
     title_align: 'center'
-    title_size:18
+    title_size: '50dp'
+    title_color: (0,0,0,1)
+    title_font: 'fonts\giz_cera.ttf'
+    #background_color: (255,255,255,1)
+    separator_color:(0,0,0,1)
+    background: 'alphabet/bg_popup.png'
+    # canvas.before:
+    #     Color:
+    #         rgba: (0,0,0,1)
+    #     Rectangle:
+    #         pos: self.pos
+    #         size: self.size
+    #         source:'alphabet/paper8.jpg'
     BoxLayout:
     	spacing: '5dp'
         size_hint:.2,.2
+        # canvas.before:
+        #     Color:
+        #         rgba: (1,1,1,1)
+        #     Rectangle:
+        #         pos: self.pos
+        #         size: self.size
+        #         source:'alphabet/paper8.jpg'
         Button:
             text: 'Não'
             on_press: root.dismiss()
             background_color: (0,0,0,0)
             font_name: 'fonts\giz_cera.ttf'
             font_size: '50dp'
-            color: (1,1,1,1)
+            color: (0,0,0,1)
+            canvas.before:
+                Color:
+                    rgba: (0, 0, 0, 1)
+                Line:
+                    width: .5
+                    rectangle: (self.x, self.y, self.width, self.height)
         Button:
             text: 'Sim'
             background_color: (0,0,0,0)
             font_name: 'fonts\giz_cera.ttf'
             font_size: '50dp'
-            color: (1,1,1,1)
+            color: (0,0,0,1)
             on_press: root.restart()
             on_press: app.root.current = 'tela1'
             on_release: root.dismiss()
+            
 
 <Menu>:
     BoxLayout:
@@ -124,27 +159,25 @@
             Label:
                 id: box1
                 size_hint: 1,.5
-                font_size: '15sp'
+                font_size: '35dp'
                 color: 0,0,0,1
                 markup: True
                 halign: 'center'
                 valign: 'top'
                 font_name: 'fonts\giz_cera.ttf'
-                font_size: '50dp'
 
 
         StackLayout:
         	padding:'12dp'
             Label:
                 id: box3
-                font_size: '23sp'
+                font_size: '35dp'
                 size_hint: 1,.1
                 color: 0,0,0,1
                 halign: "center"
                 valign: "top"
                 multiline: True
                 font_name: 'fonts\giz_cera.ttf'
-                font_size: '50dp'
 
         GridLayout:
             rows:3

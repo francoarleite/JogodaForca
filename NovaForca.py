@@ -10,7 +10,8 @@ from kivy.uix.image import Image
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.animation import Animation
-import re
+from kivy.graphics.vertex_instructions import Rectangle
+import re, os
 
 
 class Telas(ScreenManager):
@@ -26,8 +27,9 @@ class ImageButton(ButtonBehavior, Image):
 class FirstLayout(Screen,ImageButton):
     
     #Ler de um arquivo txt as dicas e as palavras e adicionam em uma lista
-    dicas = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_dicas.txt", 'r', encoding='utf-8')
-    palavras = open(r"C:\Users\Françoar\Desktop\Python\JogodaForca\arquivo_palavras.txt", 'r',encoding='utf-8')
+    print(os.getcwd())
+    dicas = open(r"JogodaForca\arquivo_dicas.txt", 'r', encoding='utf-8')
+    palavras = open(r"JogodaForca\arquivo_palavras.txt", 'r',encoding='utf-8')
     lista_de_palavras = [re.sub("\n","",i) for i in list(palavras)]
     lista_de_dicas = [re.sub("\n","",i) for i in list(dicas)]
     
