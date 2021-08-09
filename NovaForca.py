@@ -1,4 +1,3 @@
-
 from kivy.app import App
 from random import randint
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -9,9 +8,12 @@ from kivy.uix.image import Image
 from kivy.uix.image import Image
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.animation import Animation
-from kivy.graphics.vertex_instructions import Rectangle
+from kivy.core.window import Window
+from kivy.uix.button import Button
 import re, os
+
 
 
 class Telas(ScreenManager):
@@ -22,16 +24,21 @@ class Telas(ScreenManager):
 class ImageButton(ButtonBehavior, Image):
     pass
 
+class SmoothButton(Button):
+    pass
 
-
-class FirstLayout(Screen,ImageButton):
+class FirstLayout(Screen,ImageButton, SmoothButton):
     
     #Ler de um arquivo txt as dicas e as palavras e adicionam em uma lista
-    print(os.getcwd())
+    font = r'fonts\appleberry.ttf'
+    bg_color = (1,1,1,0)
+    font_sz = '50dp'
     dicas = open(r"JogodaForca\arquivo_dicas.txt", 'r', encoding='utf-8')
     palavras = open(r"JogodaForca\arquivo_palavras.txt", 'r',encoding='utf-8')
     lista_de_palavras = [re.sub("\n","",i) for i in list(palavras)]
     lista_de_dicas = [re.sub("\n","",i) for i in list(dicas)]
+
+    
     
     #Setando as variaveis auxiliares
     var = 0
@@ -84,6 +91,7 @@ class FirstLayout(Screen,ImageButton):
     def on_pre_enter(self, *args):
         self.ids.box1.text = "Dica:   " + self.gera_dica().upper()
         self.ids.box3.text = "".join(self.linha)
+        
         self.forca()
         return True
 
@@ -109,8 +117,9 @@ class FirstLayout(Screen,ImageButton):
 
         else:
             self.lista_de_erro.append(self.letra)
-            for letra in self.lista_de_erro:
-                self.ids[letra.lower()].source = "ALPHABET ERRORS/"+ letra.lower() +" - errado.png"
+            self.ids[self.letra.lower()].my_color = 1,0,0,1
+            # for letra in self.lista_de_erro:
+            #     self.ids[letra.lower()].source = "ALPHABET ERRORS/"+ letra.lower() +" - errado.png"
             self.var += 1
         self.ids.box1.text = "Dica: " + self.gera_dica().upper()
         self.ids.box3.text = "".join(linha)
@@ -118,6 +127,8 @@ class FirstLayout(Screen,ImageButton):
         
         if self.var >= 6 or " _ " not in self.linha:
             self.open_popup()
+
+        
 
 
     def reinicia_jogo(self):
@@ -127,8 +138,9 @@ class FirstLayout(Screen,ImageButton):
         self.on_pre_enter()
         self.lista_de_erro = []
         for id, widget in self.ids.items():
-            if isinstance(widget,ImageButton) == True:
-                self.ids[id].source = "Alphabet/"+ id.upper() +".png"
+            if isinstance(widget,SmoothButton) == True:
+                self.ids[id].my_color = 0,0,0,0
+                print("EEEIII")
 
 
     def restart_game(self):
@@ -139,8 +151,13 @@ class FirstLayout(Screen,ImageButton):
         self.ids.box1.text = "Dica:   " + self.gera_dica().upper()
         self.ids.box3.text = "".join(self.linha)
         self.forca()
+        for id, widget in self.ids.items():
+            if isinstance(widget,SmoothButton) == True:
+                self.ids[id].my_color = 0,0,0,0
+                print("err")
         return True
 
+    
 class Menu(Screen):
     pass
 
@@ -152,7 +169,7 @@ class CustomPopup(Popup):
         if ' _ ' not in self.FirstLayout.linha:
         	self.title = "Você Venceu :) , deseja jogar novamente?"
         else: 
-            self.title = "Você Perdeu :((( , deseja jogar novamente?"
+            self.title = "Você Perdeu :( , deseja jogar novamente?"
     
     def restart(self):
         self.FirstLayout.reinicia_jogo()

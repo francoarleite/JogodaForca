@@ -15,7 +15,7 @@
     title_color: (0,0,0,1)
     title_font: 'fonts\giz_cera.ttf'
     separator_color:(0,0,0,1)
-    background: 'alphabet/bg_popup.png'
+    background: 'images/bg_popup.png'
 
     BoxLayout:
     	spacing: '5dp'
@@ -53,14 +53,14 @@
     title_font: 'fonts\giz_cera.ttf'
     #background_color: (255,255,255,1)
     separator_color:(0,0,0,1)
-    background: 'alphabet/bg_popup.png'
+    background: 'images/bg_popup.png'
     # canvas.before:
     #     Color:
     #         rgba: (0,0,0,1)
     #     Rectangle:
     #         pos: self.pos
     #         size: self.size
-    #         source:'alphabet/paper8.jpg'
+    #         source:'images/paper8.jpg'
     BoxLayout:
     	spacing: '5dp'
         size_hint:.2,.2
@@ -70,7 +70,7 @@
         #     Rectangle:
         #         pos: self.pos
         #         size: self.size
-        #         source:'alphabet/paper8.jpg'
+        #         source:'images/paper8.jpg'
         Button:
             text: 'Não'
             on_press: root.dismiss()
@@ -83,7 +83,7 @@
                     rgba: (0, 0, 0, 1)
                 Line:
                     width: .5
-                    rectangle: (self.x, self.y, self.width, self.height)
+                    rectangle: (self.width+self.x, self.y,0,self.height+5)
         Button:
             text: 'Sim'
             background_color: (0,0,0,0)
@@ -104,7 +104,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source:'alphabet/paper8.jpg'
+                source:'images/paper8.jpg'
         Label:
             size_hint: 1,.1
             text:'JOGO DA FORCA'
@@ -133,17 +133,32 @@
                 font_size: '50dp'
                 color: (0,0,0,1)
                 on_release: app.stop()
+
+<SmoothButton@Button>:
+    background_color: 0,1,0,0
+    my_color: 0,0,0,0
+    border_radius: 18
+    canvas.after:
+        Color:
+            rgba: self.my_color
+        Line:
+            points: self.x,self.y,self.x + self.size[0],self.y+self.size[1]
+            width: 2
+        Line:
+            points: self.x ,self.y + self.size[1], self.x + self.size[0],self.y
+            width: 2
+
 <FirstLayout>:
-    BoxLayout
+    BoxLayout:
         padding: 0,'10dp',0,0
         canvas.before:
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source:'alphabet/paper8.jpg'
+                source:'images/paper8.jpg'
         orientation: 'vertical'
         ImageButton:
-            source:"alphabet/back.png"
+            source:"images/back.png"
             size_hint: .1,None
             height: 60
             on_press: root.desistir()
@@ -178,198 +193,283 @@
                 valign: "top"
                 multiline: True
                 font_name: 'fonts\giz_cera.ttf'
-
         GridLayout:
+            id: grid
             rows:3
             cols:9
-            padding: '10dp'
+            padding: '30dp'
+            spacing: '15dp'
 
-            ImageButton:
-                source:"alphabet/A.png"
+            SmoothButton:
                 id:a
                 text: 'A'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                background_color: root.bg_color
+                font_name: root.font
+                font_size: root.font_sz
+                color: (0,0,0,1)
                 on_press: root.letra = "A"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/B.png"
+                        
+            SmoothButton:
                 id:b
                 text: 'B'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "B"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/C.png"
+
+            SmoothButton:
                 id:c
                 text: 'C'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "C"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/D.png"
+            SmoothButton:
                 id:d
                 text: 'D'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "D"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/E.png"
+            SmoothButton:
                 id:e
                 text: 'E'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "E"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/F.png"
+            SmoothButton:
                 id:f
                 text: 'F'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "F"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/G.png"
+            SmoothButton:
                 id:g
                 text: 'G'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "G"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/H.png"
+            SmoothButton:
                 id:h
                 text: 'H'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "H"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/I.png"
+            SmoothButton:
                 id:i
                 text: 'I'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "I"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/J.png"
+            SmoothButton:
                 id:j
                 text: 'J'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "J"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/K.png"
+            SmoothButton:
                 id:k
                 text: 'K'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "K"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/L.png"
+            SmoothButton:
                 id:l
                 text: 'L'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "L"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/M.png"
+            SmoothButton:
                 id:m
                 text: 'M'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "M"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/N.png"
+            SmoothButton:
                 id:n
                 text: 'N'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "N"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/O.png"
+            SmoothButton:
                 id:o
                 text: 'O'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "O"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/P.png"
+            SmoothButton:
                 id:p
                 text: 'P'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "P"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/Q.png"
+            SmoothButton:
                 id:q
                 text: 'Q'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "Q"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/R.png"
+            SmoothButton:
                 id:r
                 text: 'R'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "R"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/S.png"
+            SmoothButton:
                 id:s
                 text: 'S'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "S"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/T.png"
+            SmoothButton:
                 id:t
                 text: 'T'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "T"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/U.png"
+            SmoothButton:
                 id:u
                 text: 'U'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "U"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/V.png"
+            SmoothButton:
                 id:v
                 text: 'V'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "V"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/W.png"
+            SmoothButton:
                 id:w
                 text: 'W'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "W"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/X.png"
+            SmoothButton:
                 id:x
                 text: 'X'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "X"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/Y.png"
+            SmoothButton:
                 id:y
                 text: 'Y'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "Y"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/Z.png"
+            SmoothButton:
                 id:z
                 text: 'Z'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "Z"
                 on_release: root.identifica_letra()
-            ImageButton:
-                source:"alphabet/Ç.png"
+            SmoothButton:
                 id:ç
                 text: 'Ç'
-                size_hint: 0.2,0.2
+                size_hint: .2,.2
+                font_name: root.font
+                font_size: root.font_sz
+                background_color: root.bg_color
+                color: (0,0,0,1)
                 on_press: root.letra = "Ç"
                 on_release: root.identifica_letra()
+    
